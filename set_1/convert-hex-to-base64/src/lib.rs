@@ -1,9 +1,3 @@
-#[allow(dead_code)]
-const HEX_STRING: &str = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
-
-#[allow(dead_code)]
-const BASE_64_RESULT: &str = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t";
-
 pub fn hex_to_bytes(input: &str) -> Vec<u8> {
     input
         .as_bytes()
@@ -25,7 +19,7 @@ fn get_bytes_from_hex() {
 
 /// Here's how the conversion works:
 /// 1. Take the binary data and divide it into 8-bit bytes: Our `bytes` input
-/// 2. Group the bytes into sets of three bytes (for a total of 24 bits).
+/// 2. Group the bytes into sets of three bytes (for a total of 24 bits): Line 41
 /// 3. Divide those 24 bits into four sets of six bits.
 /// 4. Convert each set of six bits into a decimal number. This gives you four decimal numbers for each three-byte group.
 /// 5. Map each decimal number to a character in the Base64 alphabet.
@@ -83,7 +77,9 @@ fn test_bytes_to_base64() {
 
 #[test]
 fn convert_hex_to_base64() {
-    let result = bytes_to_base64(&hex_to_bytes(HEX_STRING));
+    const HEX_STRING: &str = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d";
+    const BASE_64_RESULT: &str = "SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t";
 
+    let result = bytes_to_base64(&hex_to_bytes(HEX_STRING));
     assert_eq!(result, BASE_64_RESULT);
 }
